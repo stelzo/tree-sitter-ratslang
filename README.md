@@ -1,6 +1,6 @@
 # tree-sitter-ratslang
 
-Tree-sitter grammar for the Ratslang Query Language.
+Tree-sitter grammar for the Ratslang config language. See the [Ratslang repository](https://github.com/stelzo/ratslang) for more information about the language.
 
 ## Editor Integration
 
