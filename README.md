@@ -22,7 +22,7 @@ indent = { tab-width = 2, unit = "  " }
 
 [[grammar]]
 name = "ratslang"
-source = { git = "https://github.com/stelzo/tree-sitter-ratslang", rev = "cd0b6e227cf23678aff09ca8de75910adab712f9" }
+source = { git = "https://github.com/stelzo/tree-sitter-ratslang", rev = "27271a06f973c0f055d5eb31e65f38fd44eb184a" }
 ```
 
 **Copy query files to Helix runtime:**
