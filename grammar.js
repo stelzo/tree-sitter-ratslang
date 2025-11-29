@@ -60,17 +60,34 @@ module.exports = grammar({
 
         identifier: $ => /[a-zA-Z:][a-zA-Z_:\d]*/,
 
+        // Namespace identifier (used for namespace parts in dotted notation)
+        namespace_identifier: $ => alias($.identifier, 'namespace_identifier'),
+
+        // Variable name (the final identifier in a path)
+        variable_name: $ => alias($.identifier, 'variable_name'),
+
         // Namespaced variable path (e.g., my.super.long.prefix.var or _internal)
         variable_path: $ => choice(
             $.internal_variable,
+            // Single identifier
+            $.identifier,
+            // Dotted path with 2+ parts: first parts are namespace, last is variable
             seq(
-                choice($.identifier, $.internal_variable),
-                repeat(seq('.', choice($.identifier, $.internal_variable)))
+                $.namespace_identifier,
+                repeat(seq('.', $.namespace_identifier)),
+                '.',
+                choice($.variable_name, $.internal_variable)
             )
         ),
 
         // Unquoted string (identifier used as a value, not a variable reference)
-        unquoted_string: $ => $.variable_path,
+        unquoted_string: $ => choice(
+            $.identifier,
+            seq(
+                $.identifier,
+                repeat1(seq('.', $.identifier))
+            )
+        ),
 
         operator: $ => choice(
             '=', '..', ','
@@ -121,7 +138,7 @@ module.exports = grammar({
             $.string,
             $.boolean,
             $.path,
-            $.unquoted_string,  // Use unquoted_string instead of variable_path
+            $.unquoted_string,
             $.array
         ),
 

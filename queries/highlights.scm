@@ -7,8 +7,7 @@
 
 ; Unquoted strings (identifiers used as values) - use type like Minot's type_identifier
 (unquoted_string 
-  (variable_path 
-    (identifier) @type))
+  (identifier) @type)
 
 ; Literals
 (boolean) @constant.builtin.boolean
@@ -34,20 +33,24 @@
 ; Variables - internal variables have priority (same as Minot)
 (internal_variable) @variable.builtin
 
-; Identifiers in different contexts
-; In namespace blocks, highlight as function.method (different color than @type)
+; Namespace blocks - all parts should be highlighted as namespace
+(namespace_block
+  (variable_path
+    (namespace_identifier) @function.method))
+
+(namespace_block
+  (variable_path
+    (variable_name) @function.method))
+
 (namespace_block
   (variable_path
     (identifier) @function.method))
 
-; In assignments on the left side, highlight as variable
-(assignment
-  (variable_path
-    (identifier) @variable))
+; Namespace parts in dotted notation (in assignments)
+(namespace_identifier) @function.method
 
-(assignment
-  (variable_path
-    (internal_variable) @variable.builtin))
+; Variable names (final part in dotted notation, in assignments)
+(variable_name) @variable
 
 ; Default for other contexts (same as Minot)
 (identifier) @variable

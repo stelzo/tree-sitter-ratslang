@@ -88,6 +88,11 @@
     }
   },
   {
+    "type": "namespace_identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "quantity",
     "named": true,
     "fields": {},
@@ -231,15 +236,20 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "variable_path",
+          "type": "identifier",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "variable_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "variable_path",
@@ -255,6 +265,14 @@
         },
         {
           "type": "internal_variable",
+          "named": true
+        },
+        {
+          "type": "namespace_identifier",
+          "named": true
+        },
+        {
+          "type": "variable_name",
           "named": true
         }
       ]
@@ -309,6 +327,10 @@
     "named": true
   },
   {
+    "type": "namespace_identifier",
+    "named": false
+  },
+  {
     "type": "number",
     "named": true
   },
@@ -322,6 +344,10 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "variable_name",
     "named": false
   },
   {

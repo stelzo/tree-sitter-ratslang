@@ -159,6 +159,24 @@
       "type": "PATTERN",
       "value": "[a-zA-Z:][a-zA-Z_:\\d]*"
     },
+    "namespace_identifier": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": false,
+      "value": "namespace_identifier"
+    },
+    "variable_name": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": false,
+      "value": "variable_name"
+    },
     "variable_path": {
       "type": "CHOICE",
       "members": [
@@ -167,20 +185,15 @@
           "name": "internal_variable"
         },
         {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "internal_variable"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "namespace_identifier"
             },
             {
               "type": "REPEAT",
@@ -192,17 +205,59 @@
                     "value": "."
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "internal_variable"
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "namespace_identifier"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "variable_name"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "internal_variable"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "unquoted_string": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "."
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
                   }
                 ]
               }
@@ -210,10 +265,6 @@
           ]
         }
       ]
-    },
-    "unquoted_string": {
-      "type": "SYMBOL",
-      "name": "variable_path"
     },
     "operator": {
       "type": "CHOICE",
