@@ -1,11 +1,11 @@
 ; Comments
 (comment) @comment
 
-; Strings and paths - same as Minot
+; Strings and paths
 (string) @string
 (path) @string
 
-; Unquoted strings (identifiers used as values) - use type like Minot's type_identifier
+; Unquoted strings (identifiers used as values) - use type
 (unquoted_string 
   (identifier) @type)
 
@@ -13,7 +13,7 @@
 (boolean) @constant.builtin.boolean
 (number) @constant.numeric
 
-; Quantities (time and length) - same as Minot
+; Quantities (time and length)
 (time_quantity) @constant.numeric
 (length_quantity) @constant.numeric
 (quantity) @constant.numeric
@@ -30,29 +30,40 @@
 "{" @punctuation.delimiter
 "}" @punctuation.delimiter
 
-; Variables - internal variables have priority (same as Minot)
+; Namespace blocks: identifier { ... }
+; When used in namespace blocks, ALL segments (including the last) are namespaces
+; These rules must come BEFORE the general path rules to take precedence
+(namespace_block
+  (identifier) @namespace)
+(namespace_block
+  (internal_variable) @namespace)
+
+(namespace_block
+  (variable_path
+    (namespace_segment_identifier) @namespace))
+(namespace_block
+  (variable_path
+    (namespace_segment_internal) @namespace))
+(namespace_block
+  (variable_path
+    (path_last_identifier) @namespace))
+(namespace_block
+  (variable_path
+    (path_last_internal) @namespace))
+
+; Namespace highlighting for dotted paths
+; Namespace segments (middle parts) are always namespaces regardless of _ prefix
+(namespace_segment_identifier) @namespace
+(namespace_segment_internal) @namespace
+
+; Final segments in variable paths (only when NOT in namespace_block)
+(path_last_internal) @variable.builtin
+(path_last_identifier) @variable
+
+; Internal variables are builtin when used standalone (not in a path)
 (internal_variable) @variable.builtin
 
-; Namespace blocks - all parts should be highlighted as namespace
-(namespace_block
-  (variable_path
-    (namespace_identifier) @function.method))
-
-(namespace_block
-  (variable_path
-    (variable_name) @function.method))
-
-(namespace_block
-  (variable_path
-    (identifier) @function.method))
-
-; Namespace parts in dotted notation (in assignments)
-(namespace_identifier) @function.method
-
-; Variable names (final part in dotted notation, in assignments)
-(variable_name) @variable
-
-; Default for other contexts (same as Minot)
+; Normal identifiers (fallback for non-dotted usage)
 (identifier) @variable
 
 ; Keywords for includes

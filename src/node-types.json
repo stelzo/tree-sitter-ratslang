@@ -23,6 +23,14 @@
       "required": true,
       "types": [
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_variable",
+          "named": true
+        },
+        {
           "type": "rhs_values",
           "named": true
         },
@@ -81,16 +89,19 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_variable",
+          "named": true
+        },
+        {
           "type": "variable_path",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "namespace_identifier",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "quantity",
@@ -247,11 +258,6 @@
     }
   },
   {
-    "type": "variable_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "variable_path",
     "named": true,
     "fields": {},
@@ -260,19 +266,19 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "namespace_segment_identifier",
           "named": true
         },
         {
-          "type": "internal_variable",
+          "type": "namespace_segment_internal",
           "named": true
         },
         {
-          "type": "namespace_identifier",
+          "type": "path_last_identifier",
           "named": true
         },
         {
-          "type": "variable_name",
+          "type": "path_last_internal",
           "named": true
         }
       ]
@@ -327,7 +333,19 @@
     "named": true
   },
   {
-    "type": "namespace_identifier",
+    "type": "namespace_segment_identifier",
+    "named": true
+  },
+  {
+    "type": "namespace_segment_identifier",
+    "named": false
+  },
+  {
+    "type": "namespace_segment_internal",
+    "named": true
+  },
+  {
+    "type": "namespace_segment_internal",
     "named": false
   },
   {
@@ -339,15 +357,27 @@
     "named": true
   },
   {
+    "type": "path_last_identifier",
+    "named": false
+  },
+  {
+    "type": "path_last_identifier",
+    "named": true
+  },
+  {
+    "type": "path_last_internal",
+    "named": false
+  },
+  {
+    "type": "path_last_internal",
+    "named": true
+  },
+  {
     "type": "time_quantity",
     "named": true
   },
   {
     "type": "true",
-    "named": false
-  },
-  {
-    "type": "variable_name",
     "named": false
   },
   {

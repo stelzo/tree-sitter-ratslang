@@ -15,6 +15,12 @@ module.exports = grammar({
         $.comment,
     ],
 
+    conflicts: $ => [
+        [$.internal_variable, $.variable_path],
+        [$.identifier, $.variable_path],
+        [$.variable_path]
+    ],
+
     rules: {
         source_file: $ => repeat($.statement),
 
@@ -60,25 +66,35 @@ module.exports = grammar({
 
         identifier: $ => /[a-zA-Z:][a-zA-Z_:\d]*/,
 
-        // Namespace identifier (used for namespace parts in dotted notation)
-        namespace_identifier: $ => alias($.identifier, 'namespace_identifier'),
+        // Namespaced variable path (2+ segments): middle parts are namespace segments,
+        // final part is the last segment used for assignment/access
+        namespace_segment_identifier: $ => prec(2, alias($.identifier, 'namespace_segment_identifier')),
+        namespace_segment_internal: $ => prec(2, alias($.internal_variable, 'namespace_segment_internal')),
 
-        // Variable name (the final identifier in a path)
-        variable_name: $ => alias($.identifier, 'variable_name'),
+        path_last_identifier: $ => prec(1, alias($.identifier, 'path_last_identifier')),
+        path_last_internal: $ => prec(1, alias($.internal_variable, 'path_last_internal')),
 
-        // Namespaced variable path (e.g., my.super.long.prefix.var or _internal)
-        variable_path: $ => choice(
-            $.internal_variable,
-            // Single identifier
-            $.identifier,
-            // Dotted path with 2+ parts: first parts are namespace, last is variable
-            seq(
-                $.namespace_identifier,
-                repeat(seq('.', $.namespace_identifier)),
+        // Unified dotted path: handles both 2-segment and 3+ segment dotted paths
+        // Examples: _topic._a (2 segments), _topic.b.a (3 segments)
+        // All segments except the last are namespace segments
+        variable_path: $ => prec.dynamic(2, seq(
+            choice(
+                alias($.identifier, $.namespace_segment_identifier),
+                alias($.internal_variable, $.namespace_segment_internal)
+            ),
+            repeat(seq(
                 '.',
-                choice($.variable_name, $.internal_variable)
+                choice(
+                    alias($.identifier, $.namespace_segment_identifier),
+                    alias($.internal_variable, $.namespace_segment_internal)
+                )
+            )),
+            '.',
+            choice(
+                alias($.identifier, $.path_last_identifier),
+                alias($.internal_variable, $.path_last_internal)
             )
-        ),
+        )),
 
         // Unquoted string (identifier used as a value, not a variable reference)
         unquoted_string: $ => choice(
@@ -165,10 +181,12 @@ module.exports = grammar({
         assignment: $ => seq(
             choice(
                 $.variable_path,
+                $.identifier,
+                $.internal_variable,
                 // Multiple LHS: a, b, c = 1, 2, 3
                 seq(
-                    $.variable_path,
-                    repeat1(seq(',', $.variable_path))
+                    choice($.variable_path, $.identifier, $.internal_variable),
+                    repeat1(seq(',', choice($.variable_path, $.identifier, $.internal_variable)))
                 )
             ),
             '=',
@@ -176,10 +194,11 @@ module.exports = grammar({
         ),
 
         // Namespace block: namespace { ... }
-        namespace_block: $ => seq(
-            $.variable_path,
+        // Unlike Minot, no dot before the block: namespace.path { ... }
+        namespace_block: $ => prec(4, seq(
+            choice($.variable_path, $.identifier, $.internal_variable),
             $.block
-        ),
+        )),
 
         statement: $ => choice(
             $.include,
