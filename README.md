@@ -6,7 +6,7 @@ Tree-sitter grammar for the Ratslang config language. See the [Ratslang reposito
 
 ### Helix
 
-**Configure language in `~/.config/helix/languages.toml`:**
+Configure language in `~/.config/helix/languages.toml`
 
 ```toml
 [[language]]
@@ -23,7 +23,7 @@ name = "ratslang"
 source = { git = "https://github.com/stelzo/tree-sitter-ratslang", rev = "4896dc23b582fa95716853b27697d3f371afc9ed" }
 ```
 
-**Copy query files to Helix runtime:**
+Copy query files to Helix runtime
 
 ```bash
 git clone https://github.com/stelzo/tree-sitter-ratslang.git /tmp/tree-sitter-ratslang
