@@ -44,6 +44,49 @@ hx --health ratslang
 
 Open a `.rl` file in Helix - syntax highlighting should now work!
 
+### Neovim
+
+Follow the instructions to install [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) if it is not already installed.
+Then add a custom filetype for ratslang in your `init.lua`
+
+```lua
+-- ratslang filetype
+vim.filetype.add({
+  extension = {
+    -- Takes path and bufnr as arguments
+    rl = function (_, _)
+      return 'ratslang', function(bufnr)
+        -- Configure the buffer for ratslang
+        vim.bo[bufnr].shiftwidth = 2
+        vim.bo[bufnr].tabstop = 2
+        vim.bo[bufnr].expandtab = true
+        pcall(vim.treesitter.start, bufnr, 'ratslang')
+      end
+    end
+  }
+})
+```
+
+Install the ratslang grammer using nvim-treesitter (see [nvim-treesitter: adding custom languages](https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-custom-languages) for reference)
+
+```lua
+-- ratslang tree-sitter-grammar
+vim.api.nvim_create_autocmd('User', {pattern = 'TSUpdate',
+callback = function()
+  require('nvim-treesitter.parsers').ratslang = {
+    install_info = {
+      url = 'https://github.com/stelzo/tree-sitter-ratslang',
+      -- Install the provided queries
+      queries = 'queries'
+    }
+  }
+end})
+```
+
+Run `:TSInstall ratslang` to install the parser and queries.
+
+Now restart Neovim and open a `.rl` file - syntax highlighting should now work!
+
 ## Development
 
 Prerequisites:
