@@ -75,19 +75,47 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "hours"
+                "value": "ys"
               },
               {
                 "type": "STRING",
-                "value": "hour"
+                "value": "zs"
               },
               {
                 "type": "STRING",
-                "value": "mins"
+                "value": "as"
               },
               {
                 "type": "STRING",
-                "value": "min"
+                "value": "fs"
+              },
+              {
+                "type": "STRING",
+                "value": "ps"
+              },
+              {
+                "type": "STRING",
+                "value": "ns"
+              },
+              {
+                "type": "STRING",
+                "value": "us"
+              },
+              {
+                "type": "STRING",
+                "value": "µs"
+              },
+              {
+                "type": "STRING",
+                "value": "ms"
+              },
+              {
+                "type": "STRING",
+                "value": "cs"
+              },
+              {
+                "type": "STRING",
+                "value": "ds"
               },
               {
                 "type": "STRING",
@@ -95,7 +123,143 @@
               },
               {
                 "type": "STRING",
-                "value": "ms"
+                "value": "das"
+              },
+              {
+                "type": "STRING",
+                "value": "hs"
+              },
+              {
+                "type": "STRING",
+                "value": "ks"
+              },
+              {
+                "type": "STRING",
+                "value": "Ms"
+              },
+              {
+                "type": "STRING",
+                "value": "Gs"
+              },
+              {
+                "type": "STRING",
+                "value": "Ts"
+              },
+              {
+                "type": "STRING",
+                "value": "Ps"
+              },
+              {
+                "type": "STRING",
+                "value": "Es"
+              },
+              {
+                "type": "STRING",
+                "value": "Zs"
+              },
+              {
+                "type": "STRING",
+                "value": "Ys"
+              },
+              {
+                "type": "STRING",
+                "value": "min"
+              },
+              {
+                "type": "STRING",
+                "value": "mins"
+              },
+              {
+                "type": "STRING",
+                "value": "minute"
+              },
+              {
+                "type": "STRING",
+                "value": "minutes"
+              },
+              {
+                "type": "STRING",
+                "value": "h"
+              },
+              {
+                "type": "STRING",
+                "value": "hour"
+              },
+              {
+                "type": "STRING",
+                "value": "hours"
+              },
+              {
+                "type": "STRING",
+                "value": "d"
+              },
+              {
+                "type": "STRING",
+                "value": "day"
+              },
+              {
+                "type": "STRING",
+                "value": "days"
+              },
+              {
+                "type": "STRING",
+                "value": "a"
+              },
+              {
+                "type": "STRING",
+                "value": "year"
+              },
+              {
+                "type": "STRING",
+                "value": "years"
+              },
+              {
+                "type": "STRING",
+                "value": "shake"
+              },
+              {
+                "type": "STRING",
+                "value": "shakes"
+              },
+              {
+                "type": "STRING",
+                "value": "second_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "seconds_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "day_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "days_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "hour_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "hours_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "year_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "years_sidereal"
+              },
+              {
+                "type": "STRING",
+                "value": "year_tropical"
+              },
+              {
+                "type": "STRING",
+                "value": "years_tropical"
               }
             ]
           }
@@ -116,6 +280,38 @@
             "members": [
               {
                 "type": "STRING",
+                "value": "ym"
+              },
+              {
+                "type": "STRING",
+                "value": "zm"
+              },
+              {
+                "type": "STRING",
+                "value": "am"
+              },
+              {
+                "type": "STRING",
+                "value": "fm"
+              },
+              {
+                "type": "STRING",
+                "value": "pm"
+              },
+              {
+                "type": "STRING",
+                "value": "nm"
+              },
+              {
+                "type": "STRING",
+                "value": "um"
+              },
+              {
+                "type": "STRING",
+                "value": "µm"
+              },
+              {
+                "type": "STRING",
                 "value": "mm"
               },
               {
@@ -124,7 +320,259 @@
               },
               {
                 "type": "STRING",
+                "value": "dm"
+              },
+              {
+                "type": "STRING",
                 "value": "m"
+              },
+              {
+                "type": "STRING",
+                "value": "dam"
+              },
+              {
+                "type": "STRING",
+                "value": "hm"
+              },
+              {
+                "type": "STRING",
+                "value": "km"
+              },
+              {
+                "type": "STRING",
+                "value": "Mm"
+              },
+              {
+                "type": "STRING",
+                "value": "Gm"
+              },
+              {
+                "type": "STRING",
+                "value": "Tm"
+              },
+              {
+                "type": "STRING",
+                "value": "Pm"
+              },
+              {
+                "type": "STRING",
+                "value": "Em"
+              },
+              {
+                "type": "STRING",
+                "value": "Zm"
+              },
+              {
+                "type": "STRING",
+                "value": "Ym"
+              },
+              {
+                "type": "STRING",
+                "value": "ft"
+              },
+              {
+                "type": "STRING",
+                "value": "foot"
+              },
+              {
+                "type": "STRING",
+                "value": "feet"
+              },
+              {
+                "type": "STRING",
+                "value": "in"
+              },
+              {
+                "type": "STRING",
+                "value": "inch"
+              },
+              {
+                "type": "STRING",
+                "value": "inches"
+              },
+              {
+                "type": "STRING",
+                "value": "mi"
+              },
+              {
+                "type": "STRING",
+                "value": "mile"
+              },
+              {
+                "type": "STRING",
+                "value": "miles"
+              },
+              {
+                "type": "STRING",
+                "value": "yd"
+              },
+              {
+                "type": "STRING",
+                "value": "yard"
+              },
+              {
+                "type": "STRING",
+                "value": "yards"
+              },
+              {
+                "type": "STRING",
+                "value": "ch"
+              },
+              {
+                "type": "STRING",
+                "value": "chain"
+              },
+              {
+                "type": "STRING",
+                "value": "chains"
+              },
+              {
+                "type": "STRING",
+                "value": "rd"
+              },
+              {
+                "type": "STRING",
+                "value": "rod"
+              },
+              {
+                "type": "STRING",
+                "value": "rods"
+              },
+              {
+                "type": "STRING",
+                "value": "angstrom"
+              },
+              {
+                "type": "STRING",
+                "value": "ångström"
+              },
+              {
+                "type": "STRING",
+                "value": "ångstroms"
+              },
+              {
+                "type": "STRING",
+                "value": "angstroms"
+              },
+              {
+                "type": "STRING",
+                "value": "fathom"
+              },
+              {
+                "type": "STRING",
+                "value": "fathoms"
+              },
+              {
+                "type": "STRING",
+                "value": "au"
+              },
+              {
+                "type": "STRING",
+                "value": "ua"
+              },
+              {
+                "type": "STRING",
+                "value": "astronomical_unit"
+              },
+              {
+                "type": "STRING",
+                "value": "astronomical_units"
+              },
+              {
+                "type": "STRING",
+                "value": "light_year"
+              },
+              {
+                "type": "STRING",
+                "value": "light_years"
+              },
+              {
+                "type": "STRING",
+                "value": "l.y."
+              },
+              {
+                "type": "STRING",
+                "value": "pc"
+              },
+              {
+                "type": "STRING",
+                "value": "parsec"
+              },
+              {
+                "type": "STRING",
+                "value": "parsecs"
+              },
+              {
+                "type": "STRING",
+                "value": "M"
+              },
+              {
+                "type": "STRING",
+                "value": "nmi"
+              },
+              {
+                "type": "STRING",
+                "value": "nautical_mile"
+              },
+              {
+                "type": "STRING",
+                "value": "nautical_miles"
+              },
+              {
+                "type": "STRING",
+                "value": "micron"
+              },
+              {
+                "type": "STRING",
+                "value": "microns"
+              },
+              {
+                "type": "STRING",
+                "value": "µ"
+              },
+              {
+                "type": "STRING",
+                "value": "mil"
+              },
+              {
+                "type": "STRING",
+                "value": "mils"
+              },
+              {
+                "type": "STRING",
+                "value": "a₀"
+              },
+              {
+                "type": "STRING",
+                "value": "bohr_radius"
+              },
+              {
+                "type": "STRING",
+                "value": "bohr_radiuses"
+              },
+              {
+                "type": "STRING",
+                "value": "fermi"
+              },
+              {
+                "type": "STRING",
+                "value": "fermis"
+              },
+              {
+                "type": "STRING",
+                "value": "Å"
+              },
+              {
+                "type": "STRING",
+                "value": "μm"
+              },
+              {
+                "type": "STRING",
+                "value": "microinch"
+              },
+              {
+                "type": "STRING",
+                "value": "microinches"
               }
             ]
           }
@@ -748,19 +1196,7 @@
       "name": "comment"
     }
   ],
-  "conflicts": [
-    [
-      "internal_variable",
-      "variable_path"
-    ],
-    [
-      "identifier",
-      "variable_path"
-    ],
-    [
-      "variable_path"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],

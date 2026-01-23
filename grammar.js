@@ -15,12 +15,6 @@ module.exports = grammar({
         $.comment,
     ],
 
-    conflicts: $ => [
-        [$.internal_variable, $.variable_path],
-        [$.identifier, $.variable_path],
-        [$.variable_path]
-    ],
-
     rules: {
         source_file: $ => repeat($.statement),
 
@@ -46,14 +40,27 @@ module.exports = grammar({
         // Time quantities
         time_quantity: $ => token(seq(
             /[+-]?(\d+\.\d+|\d+)/,
-            choice('hours', 'hour', 'mins', 'min', 's', 'ms')
+            choice(
+                'ys','zs','as','fs','ps','ns','us','µs','ms','cs','ds','s','das','hs','ks','Ms','Gs','Ts','Ps','Es','Zs','Ys',
+                'min','mins','minute','minutes','h','hour','hours','d','day','days','a','year','years',
+                'shake','shakes',
+                'second_sidereal','seconds_sidereal','day_sidereal','days_sidereal','hour_sidereal','hours_sidereal','year_sidereal','years_sidereal',
+                'year_tropical','years_tropical'
+            )
         )),
 
         // Length quantities
         length_quantity: $ => token(seq(
             /[+-]?(\d+\.\d+|\d+)/,
-            choice('mm', 'cm', 'm')
+            choice(
+                'ym','zm','am','fm','pm','nm','um','µm','mm','cm','dm','m','dam','hm','km','Mm','Gm','Tm','Pm','Em','Zm','Ym',
+                'ft','foot','feet','in','inch','inches','mi','mile','miles','yd','yard','yards','ch','chain','chains','rd','rod','rods',
+                'angstrom','ångström','ångstroms','angstroms','fathom','fathoms','au','ua','astronomical_unit','astronomical_units',
+                'light_year','light_years','l.y.','pc','parsec','parsecs','M','nmi','nautical_mile','nautical_miles','micron','microns','µ','mil','mils',
+                'a₀','bohr_radius','bohr_radiuses','fermi','fermis','Å','μm','microinch','microinches'
+            )
         )),
+
 
         quantity: $ => choice(
             $.time_quantity,
