@@ -1,6 +1,6 @@
 # tree-sitter-ratslang
 
-Tree-sitter grammar for the Ratslang config language. See the [Ratslang repository](https://github.com/stelzo/ratslang) for more information about the language.
+Tree-sitter grammar for the Ratslang config language. See the [Ratslang repository](https://codeberg.org/stelzo/ratslang) for more information about the language.
 
 ## Editor Integration
 
@@ -20,13 +20,13 @@ indent = { tab-width = 2, unit = "  " }
 
 [[grammar]]
 name = "ratslang"
-source = { git = "https://github.com/stelzo/tree-sitter-ratslang", rev = "8c7b5014b99c3d0757a431128c9cabb48e57dbc4" }
+source = { git = "https://codeberg.org/stelzo/tree-sitter-ratslang", rev = "8c7b5014b99c3d0757a431128c9cabb48e57dbc4" }
 ```
 
 Copy query files to Helix runtime
 
 ```bash
-git clone https://github.com/stelzo/tree-sitter-ratslang.git /tmp/tree-sitter-ratslang
+git clone https://codeberg.org/stelzo/tree-sitter-ratslang.git /tmp/tree-sitter-ratslang
 mkdir -p ~/.config/helix/runtime/queries/ratslang
 cp /tmp/tree-sitter-ratslang/queries/*.scm ~/.config/helix/runtime/queries/ratslang/
 ```
@@ -75,7 +75,7 @@ vim.api.nvim_create_autocmd('User', {pattern = 'TSUpdate',
 callback = function()
   require('nvim-treesitter.parsers').ratslang = {
     install_info = {
-      url = 'https://github.com/stelzo/tree-sitter-ratslang',
+      url = 'https://codeberg.org/stelzo/tree-sitter-ratslang',
       -- Install the provided queries
       queries = 'queries'
     }

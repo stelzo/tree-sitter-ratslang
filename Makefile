@@ -3,7 +3,7 @@ $(error Windows is not supported)
 endif
 
 LANGUAGE_NAME := tree-sitter-ratslang
-HOMEPAGE_URL := https://github.com/stelzo/tree-sitter-ratslang
+HOMEPAGE_URL := https://codeberg.org/stelzo/tree-sitter-ratslang
 VERSION := 0.1.0
 
 # repository

@@ -1,4 +1,4 @@
-module github.com/stelzo/tree-sitter-ratslang
+module codeberg.org/stelzo/tree-sitter-ratslang
 
 go 1.22
 

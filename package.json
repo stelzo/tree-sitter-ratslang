@@ -2,7 +2,7 @@
   "name": "tree-sitter-ratslang",
   "version": "0.1.0",
   "description": "Configuration language for Robots",
-  "repository": "https://github.com/stelzo/tree-sitter-ratslang",
+  "repository": "https://codeberg.org/stelzo/tree-sitter-ratslang",
   "license": "MIT",
   "author": {
     "name": "Christopher Sieh",

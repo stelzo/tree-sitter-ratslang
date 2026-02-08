@@ -24,7 +24,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/stelzo/tree-sitter-ratslang"
+      "repository": "https://codeberg.org/stelzo/tree-sitter-ratslang"
     }
   },
   "bindings": {

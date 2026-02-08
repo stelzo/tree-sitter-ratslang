@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(tree-sitter-ratslang
         VERSION "0.1.0"
         DESCRIPTION "Configuration language for Robots"
-        HOMEPAGE_URL "https://github.com/stelzo/tree-sitter-ratslang"
+        HOMEPAGE_URL "https://codeberg.org/stelzo/tree-sitter-ratslang"
         LANGUAGES C)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)

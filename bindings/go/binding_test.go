@@ -3,8 +3,8 @@ package tree_sitter_ratslang_test
 import (
 	"testing"
 
+	tree_sitter_ratslang "codeberg.org/stelzo/tree-sitter-ratslang/bindings/go"
 	tree_sitter "github.com/tree-sitter/go-tree-sitter"
-	tree_sitter_ratslang "github.com/stelzo/tree-sitter-ratslang/bindings/go"
 )
 
 func TestCanLoadGrammar(t *testing.T) {
