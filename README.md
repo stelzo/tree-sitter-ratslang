@@ -11,11 +11,11 @@ For language syntax, units, constraints, and editor/LSP setup, see the
 
 ## Development
 
-Use Node.js, a C compiler, Rust/Cargo, and tree-sitter-cli 0.25.10. Generate ABI 14
+Use Node.js, a C compiler, Rust 1.90 or newer with Cargo, and tree-sitter-cli 0.27.1. Generate ABI 14
 parsers for compatibility with Helix and Neovim:
 
 ```sh
-cargo install tree-sitter-cli --version 0.25.10 --locked
+cargo install tree-sitter-cli --version 0.27.1 --locked
 tree-sitter generate --abi 14
 cargo test
 ```

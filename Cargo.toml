@@ -1,23 +1,27 @@
 [package]
 name = "tree-sitter-ratslang"
-description = "Configuration language for Robots"
+description = "Tree-sitter grammar for the Ratslang configuration language"
 version = "0.2.0"
-authors = ["stelzo <stelzo@steado.de>"]
 license = "MIT"
 readme = "README.md"
+documentation = "https://docs.rs/tree-sitter-ratslang"
 keywords = ["incremental", "parsing", "tree-sitter", "ratslang"]
 categories = ["parser-implementations", "parsing", "text-editors"]
 repository = "https://codeberg.org/stelzo/tree-sitter-ratslang"
 edition = "2021"
+rust-version = "1.90"
 autoexamples = false
 
 build = "bindings/rust/build.rs"
 include = [
   "bindings/rust/*",
-  "grammar.js",
+  "/grammar.js",
   "queries/*",
-  "src/*",
-  "tree-sitter.json",
+  "src/**",
+  "tests/*.rs",
+  "test/*.rl",
+  "/CHANGELOG.md",
+  "/tree-sitter.json",
   "/LICENSE",
 ]
 
@@ -25,10 +29,10 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter-language = "0.1"
+tree-sitter-language = "0.1.9"
 
 [build-dependencies]
-cc = "1.2"
+cc = "1.10.0"
 
 [dev-dependencies]
-tree-sitter = "0.25.10"
+tree-sitter = "0.27.1"
