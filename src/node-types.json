@@ -112,11 +112,31 @@
       "required": true,
       "types": [
         {
+          "type": "acceleration_quantity",
+          "named": true
+        },
+        {
+          "type": "angle_quantity",
+          "named": true
+        },
+        {
+          "type": "frequency_quantity",
+          "named": true
+        },
+        {
           "type": "length_quantity",
           "named": true
         },
         {
+          "type": "mass_quantity",
+          "named": true
+        },
+        {
           "type": "time_quantity",
+          "named": true
+        },
+        {
+          "type": "velocity_quantity",
           "named": true
         }
       ]
@@ -202,6 +222,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -238,11 +259,6 @@
     }
   },
   {
-    "type": "string",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "unquoted_string",
     "named": true,
     "fields": {},
@@ -252,6 +268,10 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "internal_variable",
           "named": true
         }
       ]
@@ -285,10 +305,6 @@
     }
   },
   {
-    "type": "\"",
-    "named": false
-  },
-  {
     "type": ",",
     "named": false
   },
@@ -313,12 +329,25 @@
     "named": false
   },
   {
-    "type": "comment",
+    "type": "acceleration_quantity",
     "named": true
+  },
+  {
+    "type": "angle_quantity",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "extra": true
   },
   {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "frequency_quantity",
+    "named": true
   },
   {
     "type": "identifier",
@@ -333,20 +362,16 @@
     "named": true
   },
   {
-    "type": "namespace_segment_identifier",
+    "type": "mass_quantity",
     "named": true
   },
   {
     "type": "namespace_segment_identifier",
-    "named": false
-  },
-  {
-    "type": "namespace_segment_internal",
     "named": true
   },
   {
     "type": "namespace_segment_internal",
-    "named": false
+    "named": true
   },
   {
     "type": "number",
@@ -358,18 +383,14 @@
   },
   {
     "type": "path_last_identifier",
-    "named": false
-  },
-  {
-    "type": "path_last_identifier",
     "named": true
   },
   {
     "type": "path_last_internal",
-    "named": false
+    "named": true
   },
   {
-    "type": "path_last_internal",
+    "type": "string",
     "named": true
   },
   {
@@ -379,6 +400,10 @@
   {
     "type": "true",
     "named": false
+  },
+  {
+    "type": "velocity_quantity",
+    "named": true
   },
   {
     "type": "{",

@@ -20,56 +20,45 @@ module.exports = grammar({
 
         comment: $ => /#[^\n]*/,
 
-        string: $ => seq(
-            '"',
-            repeat(choice(
-                /[^"\\\n]+/,
-                /\\./
-            )),
-            '"'
-        ),
+        // Quotes delimit raw strings; backslashes have no escape semantics.
+        string: $ => token(/"[^"]*"/),
 
-        // Matches paths starting with / or ./
-        path: $ => token(/\.?\/+[^\n\s]*/),
+        // Like the compiler, an unquoted path extends to the next space/newline.
+        path: $ => token(/\.?\/+[^ \n]*/),
 
         boolean: $ => choice(
             'true',
             'false'
         ),
 
-        // Time quantities
-        time_quantity: $ => token(seq(
-            /[+-]?(\d+\.\d+|\d+)/,
-            choice(
-                'ys','zs','as','fs','ps','ns','us','µs','ms','cs','ds','s','das','hs','ks','Ms','Gs','Ts','Ps','Es','Zs','Ys',
-                'min','mins','minute','minutes','h','hour','hours','d','day','days','a','year','years',
-                'shake','shakes',
-                'second_sidereal','seconds_sidereal','day_sidereal','days_sidereal','hour_sidereal','hours_sidereal','year_sidereal','years_sidereal',
-                'year_tropical','years_tropical'
-            )
-        )),
+        // Keep quantity tokens aligned with the compiler lexer.
+        time_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:shakes?|years?|minutes?|hours?|days?|seconds?_sidereal|days?_sidereal|hours?_sidereal|years?_sidereal|years?_tropical|ys|zs|as|fs|ps|ns|us|µs|ms|cs|ds|s|das|hs|ks|Ms|Gs|Ts|Ps|Es|Zs|Ys|min|h|d|a)/),
 
-        // Length quantities
-        length_quantity: $ => token(seq(
-            /[+-]?(\d+\.\d+|\d+)/,
-            choice(
-                'ym','zm','am','fm','pm','nm','um','µm','mm','cm','dm','m','dam','hm','km','Mm','Gm','Tm','Pm','Em','Zm','Ym',
-                'ft','foot','feet','in','inch','inches','mi','mile','miles','yd','yard','yards','ch','chain','chains','rd','rod','rods',
-                'angstrom','ångström','ångstroms','angstroms','fathom','fathoms','au','ua','astronomical_unit','astronomical_units',
-                'light_year','light_years','l.y.','pc','parsec','parsecs','M','nmi','nautical_mile','nautical_miles','micron','microns','µ','mil','mils',
-                'a₀','bohr_radius','bohr_radiuses','fermi','fermis','Å','μm','microinch','microinches'
-            )
-        )),
+        length_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:astronomical_units?|nautical_miles?|light_years?|microinches?|bohr_radiuses?|ångströms?|astronomical_unit|nautical_mile|light_year|microinch|bohr_radius|ångström|angstroms?|angstrom|feet|inches|yards|miles|chains|rods|fathoms?|fermis?|fermi|microns?|micron|mils?|ym|zm|am|fm|pm|nm|um|µm|mm|cm|dm|dam|hm|km|Mm|Gm|Tm|Pm|Em|Zm|Ym|ft|in|mi|yd|ch|rd|ua|au|pc|l\.y\.|Å|µ|μm|m)/),
 
+        mass_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:milligrams?|micrograms?|nanograms?|kilograms?|grams?|tonnes?|metric_ton|pounds?|ounces?|lb|oz|yg|zg|ag|fg|pg|ng|ug|µg|μg|mg|cg|dg|dag|hg|kg|Mg|Gg|Tg|Pg|Eg|Zg|Yg|g|t)/),
+
+        angle_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:deg|rad|mrad|urad|µrad)/),
+
+        frequency_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:mHz|Hz|kHz|MHz|GHz)/),
+
+        velocity_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:m\/s|cm\/s|mm\/s|km\/h)/),
+
+        acceleration_quantity: $ => token(/[+-]?(?:\d+\.\d+|\d+)(?:m\/s2|m\/s\^2|cm\/s2|cm\/s\^2|mm\/s2|mm\/s\^2)/),
 
         quantity: $ => choice(
             $.time_quantity,
-            $.length_quantity
+            $.length_quantity,
+            $.mass_quantity,
+            $.angle_quantity,
+            $.frequency_quantity,
+            $.velocity_quantity,
+            $.acceleration_quantity
         ),
 
         number: $ => token(/[+-]?(\d+\.\d+|\d+)/),
 
-        internal_variable: $ => /_[a-zA-Z_:\d]+/,
+        internal_variable: $ => /_[a-zA-Z_:\d]*/,
 
         identifier: $ => /[a-zA-Z:][a-zA-Z_:\d]*/,
 
@@ -104,12 +93,9 @@ module.exports = grammar({
         )),
 
         // Unquoted string (identifier used as a value, not a variable reference)
-        unquoted_string: $ => choice(
-            $.identifier,
-            seq(
-                $.identifier,
-                repeat1(seq('.', $.identifier))
-            )
+        unquoted_string: $ => seq(
+            choice($.identifier, $.internal_variable),
+            repeat(seq('.', choice($.identifier, $.internal_variable)))
         ),
 
         operator: $ => choice(

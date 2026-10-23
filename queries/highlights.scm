@@ -13,9 +13,14 @@
 (boolean) @constant.builtin.boolean
 (number) @constant.numeric
 
-; Quantities (time and length)
+; Physical quantities
 (time_quantity) @constant.numeric
 (length_quantity) @constant.numeric
+(mass_quantity) @constant.numeric
+(angle_quantity) @constant.numeric
+(frequency_quantity) @constant.numeric
+(velocity_quantity) @constant.numeric
+(acceleration_quantity) @constant.numeric
 (quantity) @constant.numeric
 
 ; Operators

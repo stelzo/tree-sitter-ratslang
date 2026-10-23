@@ -1,108 +1,29 @@
 # tree-sitter-ratslang
 
-Tree-sitter grammar for the Ratslang config language. See the [Ratslang repository](https://codeberg.org/stelzo/ratslang) for more information about the language.
+Tree-sitter grammar and editor queries for
+[Ratslang](https://codeberg.org/stelzo/ratslang).
 
-## Editor Integration
-
-### Helix
-
-Configure language in `~/.config/helix/languages.toml`
-
-```toml
-[[language]]
-name = "ratslang"
-scope = "source.ratslang"
-file-types = ["ratslang", "rl"]
-roots = []
-comment-token = "#"
-injection-regex = "ratslang"
-indent = { tab-width = 2, unit = "  " }
-
-[[grammar]]
-name = "ratslang"
-source = { git = "https://codeberg.org/stelzo/tree-sitter-ratslang", rev = "8c7b5014b99c3d0757a431128c9cabb48e57dbc4" }
-```
-
-Copy query files to Helix runtime
-
-```bash
-git clone https://codeberg.org/stelzo/tree-sitter-ratslang.git /tmp/tree-sitter-ratslang
-mkdir -p ~/.config/helix/runtime/queries/ratslang
-cp /tmp/tree-sitter-ratslang/queries/*.scm ~/.config/helix/runtime/queries/ratslang/
-```
-
-Fetch and build the grammar
-```bash
-hx --grammar fetch
-hx --grammar build
-```
-
-Verify installation
-```bash
-hx --health ratslang
-```
-
-Open a `.rl` file in Helix - syntax highlighting should now work!
-
-### Neovim
-
-Follow the instructions to install [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) if it is not already installed.
-Then add a custom filetype for ratslang in your `init.lua`
-
-```lua
--- ratslang filetype
-vim.filetype.add({
-  extension = {
-    -- Takes path and bufnr as arguments
-    rl = function (_, _)
-      return 'ratslang', function(bufnr)
-        -- Configure the buffer for ratslang
-        vim.bo[bufnr].shiftwidth = 2
-        vim.bo[bufnr].tabstop = 2
-        vim.bo[bufnr].expandtab = true
-        pcall(vim.treesitter.start, bufnr, 'ratslang')
-      end
-    end
-  }
-})
-```
-
-Install the ratslang grammer using nvim-treesitter (see [nvim-treesitter: adding custom languages](https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#adding-custom-languages) for reference)
-
-```lua
--- ratslang tree-sitter-grammar
-vim.api.nvim_create_autocmd('User', {pattern = 'TSUpdate',
-callback = function()
-  require('nvim-treesitter.parsers').ratslang = {
-    install_info = {
-      url = 'https://codeberg.org/stelzo/tree-sitter-ratslang',
-      -- Install the provided queries
-      queries = 'queries'
-    }
-  }
-end})
-```
-
-Run `:TSInstall ratslang` to install the parser and queries.
-
-Now restart Neovim and open a `.rl` file - syntax highlighting should now work!
+For language syntax, units, constraints, and editor/LSP setup, see the
+[Ratslang README](https://codeberg.org/stelzo/ratslang#editor-support), including
+[Helix](https://codeberg.org/stelzo/ratslang#helix),
+[Neovim](https://codeberg.org/stelzo/ratslang#neovim), and
+[VS Code](https://codeberg.org/stelzo/ratslang#vs-code).
 
 ## Development
 
-Prerequisites:
-- Node.js and npm
-- tree-sitter-cli version 0.23.x (important for Helix compatibility)
+Use Node.js, a C compiler, Rust/Cargo, and tree-sitter-cli 0.25.10. Generate ABI 14
+parsers for compatibility with Helix and Neovim:
 
-```bash
-npm install -g tree-sitter-cli@0.23
+```sh
+cargo install tree-sitter-cli --version 0.25.10 --locked
+tree-sitter generate --abi 14
+cargo test
 ```
 
-Generate Parser
-```bash
-tree-sitter generate
-```
+Check in `src/parser.c`, `src/grammar.json`, and `src/node-types.json` after a
+grammar change. Rust tests exercise complete quantity tokens, arrays/ranges,
+comment annotations, references, raw strings, and all editor queries.
 
 ## License
 
 MIT
-

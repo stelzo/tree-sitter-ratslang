@@ -2,7 +2,7 @@
 variable = true
 
 time = 1s
-time_is_running = 1ms..2mins
+time_is_running = 1ms..2min
 
 len = 1cm..1m
 

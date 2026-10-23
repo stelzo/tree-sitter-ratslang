@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "ratslang",
   "rules": {
     "source_file": {
@@ -13,39 +14,17 @@
       "value": "#[^\\n]*"
     },
     "string": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "\""
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[^\"\\\\\\n]+"
-              },
-              {
-                "type": "PATTERN",
-                "value": "\\\\."
-              }
-            ]
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "\""
-        }
-      ]
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\"[^\"]*\""
+      }
     },
     "path": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "\\.?\\/+[^\\n\\s]*"
+        "value": "\\.?\\/+[^ \\n]*"
       }
     },
     "boolean": {
@@ -64,519 +43,50 @@
     "time_quantity": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[+-]?(\\d+\\.\\d+|\\d+)"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "ys"
-              },
-              {
-                "type": "STRING",
-                "value": "zs"
-              },
-              {
-                "type": "STRING",
-                "value": "as"
-              },
-              {
-                "type": "STRING",
-                "value": "fs"
-              },
-              {
-                "type": "STRING",
-                "value": "ps"
-              },
-              {
-                "type": "STRING",
-                "value": "ns"
-              },
-              {
-                "type": "STRING",
-                "value": "us"
-              },
-              {
-                "type": "STRING",
-                "value": "µs"
-              },
-              {
-                "type": "STRING",
-                "value": "ms"
-              },
-              {
-                "type": "STRING",
-                "value": "cs"
-              },
-              {
-                "type": "STRING",
-                "value": "ds"
-              },
-              {
-                "type": "STRING",
-                "value": "s"
-              },
-              {
-                "type": "STRING",
-                "value": "das"
-              },
-              {
-                "type": "STRING",
-                "value": "hs"
-              },
-              {
-                "type": "STRING",
-                "value": "ks"
-              },
-              {
-                "type": "STRING",
-                "value": "Ms"
-              },
-              {
-                "type": "STRING",
-                "value": "Gs"
-              },
-              {
-                "type": "STRING",
-                "value": "Ts"
-              },
-              {
-                "type": "STRING",
-                "value": "Ps"
-              },
-              {
-                "type": "STRING",
-                "value": "Es"
-              },
-              {
-                "type": "STRING",
-                "value": "Zs"
-              },
-              {
-                "type": "STRING",
-                "value": "Ys"
-              },
-              {
-                "type": "STRING",
-                "value": "min"
-              },
-              {
-                "type": "STRING",
-                "value": "mins"
-              },
-              {
-                "type": "STRING",
-                "value": "minute"
-              },
-              {
-                "type": "STRING",
-                "value": "minutes"
-              },
-              {
-                "type": "STRING",
-                "value": "h"
-              },
-              {
-                "type": "STRING",
-                "value": "hour"
-              },
-              {
-                "type": "STRING",
-                "value": "hours"
-              },
-              {
-                "type": "STRING",
-                "value": "d"
-              },
-              {
-                "type": "STRING",
-                "value": "day"
-              },
-              {
-                "type": "STRING",
-                "value": "days"
-              },
-              {
-                "type": "STRING",
-                "value": "a"
-              },
-              {
-                "type": "STRING",
-                "value": "year"
-              },
-              {
-                "type": "STRING",
-                "value": "years"
-              },
-              {
-                "type": "STRING",
-                "value": "shake"
-              },
-              {
-                "type": "STRING",
-                "value": "shakes"
-              },
-              {
-                "type": "STRING",
-                "value": "second_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "seconds_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "day_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "days_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "hour_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "hours_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "year_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "years_sidereal"
-              },
-              {
-                "type": "STRING",
-                "value": "year_tropical"
-              },
-              {
-                "type": "STRING",
-                "value": "years_tropical"
-              }
-            ]
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:shakes?|years?|minutes?|hours?|days?|seconds?_sidereal|days?_sidereal|hours?_sidereal|years?_sidereal|years?_tropical|ys|zs|as|fs|ps|ns|us|µs|ms|cs|ds|s|das|hs|ks|Ms|Gs|Ts|Ps|Es|Zs|Ys|min|h|d|a)"
       }
     },
     "length_quantity": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "[+-]?(\\d+\\.\\d+|\\d+)"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "ym"
-              },
-              {
-                "type": "STRING",
-                "value": "zm"
-              },
-              {
-                "type": "STRING",
-                "value": "am"
-              },
-              {
-                "type": "STRING",
-                "value": "fm"
-              },
-              {
-                "type": "STRING",
-                "value": "pm"
-              },
-              {
-                "type": "STRING",
-                "value": "nm"
-              },
-              {
-                "type": "STRING",
-                "value": "um"
-              },
-              {
-                "type": "STRING",
-                "value": "µm"
-              },
-              {
-                "type": "STRING",
-                "value": "mm"
-              },
-              {
-                "type": "STRING",
-                "value": "cm"
-              },
-              {
-                "type": "STRING",
-                "value": "dm"
-              },
-              {
-                "type": "STRING",
-                "value": "m"
-              },
-              {
-                "type": "STRING",
-                "value": "dam"
-              },
-              {
-                "type": "STRING",
-                "value": "hm"
-              },
-              {
-                "type": "STRING",
-                "value": "km"
-              },
-              {
-                "type": "STRING",
-                "value": "Mm"
-              },
-              {
-                "type": "STRING",
-                "value": "Gm"
-              },
-              {
-                "type": "STRING",
-                "value": "Tm"
-              },
-              {
-                "type": "STRING",
-                "value": "Pm"
-              },
-              {
-                "type": "STRING",
-                "value": "Em"
-              },
-              {
-                "type": "STRING",
-                "value": "Zm"
-              },
-              {
-                "type": "STRING",
-                "value": "Ym"
-              },
-              {
-                "type": "STRING",
-                "value": "ft"
-              },
-              {
-                "type": "STRING",
-                "value": "foot"
-              },
-              {
-                "type": "STRING",
-                "value": "feet"
-              },
-              {
-                "type": "STRING",
-                "value": "in"
-              },
-              {
-                "type": "STRING",
-                "value": "inch"
-              },
-              {
-                "type": "STRING",
-                "value": "inches"
-              },
-              {
-                "type": "STRING",
-                "value": "mi"
-              },
-              {
-                "type": "STRING",
-                "value": "mile"
-              },
-              {
-                "type": "STRING",
-                "value": "miles"
-              },
-              {
-                "type": "STRING",
-                "value": "yd"
-              },
-              {
-                "type": "STRING",
-                "value": "yard"
-              },
-              {
-                "type": "STRING",
-                "value": "yards"
-              },
-              {
-                "type": "STRING",
-                "value": "ch"
-              },
-              {
-                "type": "STRING",
-                "value": "chain"
-              },
-              {
-                "type": "STRING",
-                "value": "chains"
-              },
-              {
-                "type": "STRING",
-                "value": "rd"
-              },
-              {
-                "type": "STRING",
-                "value": "rod"
-              },
-              {
-                "type": "STRING",
-                "value": "rods"
-              },
-              {
-                "type": "STRING",
-                "value": "angstrom"
-              },
-              {
-                "type": "STRING",
-                "value": "ångström"
-              },
-              {
-                "type": "STRING",
-                "value": "ångstroms"
-              },
-              {
-                "type": "STRING",
-                "value": "angstroms"
-              },
-              {
-                "type": "STRING",
-                "value": "fathom"
-              },
-              {
-                "type": "STRING",
-                "value": "fathoms"
-              },
-              {
-                "type": "STRING",
-                "value": "au"
-              },
-              {
-                "type": "STRING",
-                "value": "ua"
-              },
-              {
-                "type": "STRING",
-                "value": "astronomical_unit"
-              },
-              {
-                "type": "STRING",
-                "value": "astronomical_units"
-              },
-              {
-                "type": "STRING",
-                "value": "light_year"
-              },
-              {
-                "type": "STRING",
-                "value": "light_years"
-              },
-              {
-                "type": "STRING",
-                "value": "l.y."
-              },
-              {
-                "type": "STRING",
-                "value": "pc"
-              },
-              {
-                "type": "STRING",
-                "value": "parsec"
-              },
-              {
-                "type": "STRING",
-                "value": "parsecs"
-              },
-              {
-                "type": "STRING",
-                "value": "M"
-              },
-              {
-                "type": "STRING",
-                "value": "nmi"
-              },
-              {
-                "type": "STRING",
-                "value": "nautical_mile"
-              },
-              {
-                "type": "STRING",
-                "value": "nautical_miles"
-              },
-              {
-                "type": "STRING",
-                "value": "micron"
-              },
-              {
-                "type": "STRING",
-                "value": "microns"
-              },
-              {
-                "type": "STRING",
-                "value": "µ"
-              },
-              {
-                "type": "STRING",
-                "value": "mil"
-              },
-              {
-                "type": "STRING",
-                "value": "mils"
-              },
-              {
-                "type": "STRING",
-                "value": "a₀"
-              },
-              {
-                "type": "STRING",
-                "value": "bohr_radius"
-              },
-              {
-                "type": "STRING",
-                "value": "bohr_radiuses"
-              },
-              {
-                "type": "STRING",
-                "value": "fermi"
-              },
-              {
-                "type": "STRING",
-                "value": "fermis"
-              },
-              {
-                "type": "STRING",
-                "value": "Å"
-              },
-              {
-                "type": "STRING",
-                "value": "μm"
-              },
-              {
-                "type": "STRING",
-                "value": "microinch"
-              },
-              {
-                "type": "STRING",
-                "value": "microinches"
-              }
-            ]
-          }
-        ]
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:astronomical_units?|nautical_miles?|light_years?|microinches?|bohr_radiuses?|ångströms?|astronomical_unit|nautical_mile|light_year|microinch|bohr_radius|ångström|angstroms?|angstrom|feet|inches|yards|miles|chains|rods|fathoms?|fermis?|fermi|microns?|micron|mils?|ym|zm|am|fm|pm|nm|um|µm|mm|cm|dm|dam|hm|km|Mm|Gm|Tm|Pm|Em|Zm|Ym|ft|in|mi|yd|ch|rd|ua|au|pc|l\\.y\\.|Å|µ|μm|m)"
+      }
+    },
+    "mass_quantity": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:milligrams?|micrograms?|nanograms?|kilograms?|grams?|tonnes?|metric_ton|pounds?|ounces?|lb|oz|yg|zg|ag|fg|pg|ng|ug|µg|μg|mg|cg|dg|dag|hg|kg|Mg|Gg|Tg|Pg|Eg|Zg|Yg|g|t)"
+      }
+    },
+    "angle_quantity": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:deg|rad|mrad|urad|µrad)"
+      }
+    },
+    "frequency_quantity": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:mHz|Hz|kHz|MHz|GHz)"
+      }
+    },
+    "velocity_quantity": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:m\\/s|cm\\/s|mm\\/s|km\\/h)"
+      }
+    },
+    "acceleration_quantity": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]?(?:\\d+\\.\\d+|\\d+)(?:m\\/s2|m\\/s\\^2|cm\\/s2|cm\\/s\\^2|mm\\/s2|mm\\/s\\^2)"
       }
     },
     "quantity": {
@@ -589,6 +99,26 @@
         {
           "type": "SYMBOL",
           "name": "length_quantity"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mass_quantity"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "angle_quantity"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "frequency_quantity"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "velocity_quantity"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "acceleration_quantity"
         }
       ]
     },
@@ -601,7 +131,7 @@
     },
     "internal_variable": {
       "type": "PATTERN",
-      "value": "_[a-zA-Z_:\\d]+"
+      "value": "_[a-zA-Z_:\\d]*"
     },
     "identifier": {
       "type": "PATTERN",
@@ -754,36 +284,45 @@
       }
     },
     "unquoted_string": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
               "name": "identifier"
             },
             {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
+              "type": "SYMBOL",
+              "name": "internal_variable"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "CHOICE",
                 "members": [
-                  {
-                    "type": "STRING",
-                    "value": "."
-                  },
                   {
                     "type": "SYMBOL",
                     "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "internal_variable"
                   }
                 ]
               }
-            }
-          ]
+            ]
+          }
         }
       ]
     },
@@ -1200,5 +739,6 @@
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }

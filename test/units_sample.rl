@@ -6,3 +6,9 @@ l1 = 10angstrom
 l2 = 3Å
 l3 = 4light_year
 l4 = 5km
+
+mass = 250mg..2kg
+angle = -90deg
+frequency = 20kHz
+velocity = 50km/h
+acceleration = 9.81m/s^2
