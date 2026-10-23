@@ -5,7 +5,7 @@
   "repository": "https://codeberg.org/stelzo/tree-sitter-ratslang",
   "license": "MIT",
   "author": {
-    "name": "Christopher Sieh",
+    "name": "stelzo",
     "email": "stelzo@steado.de"
   },
   "main": "bindings/node",

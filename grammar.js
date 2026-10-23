@@ -1,6 +1,6 @@
 /**
  * @file Configuration language for Robots
- * @author Christopher Sieh <stelzo@steado.de>
+ * @author stelzo <stelzo@steado.de>
  * @license MIT
  */
 
